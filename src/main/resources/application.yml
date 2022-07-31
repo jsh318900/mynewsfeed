@@ -1,0 +1,14 @@
+external:
+    api:
+        youtube:
+            baseurl: https://www.googleapis.com/youtube/v3
+            auth_endpoint: https://accounts.google.com/o/oauth/v2/auth
+            client_id: ${OAUTH_YOUTUBE_CLIENT_ID}
+            client_secret: ${OAUTH_YOUTUBE_CLIENT_SECRET}
+        twitch:
+            baseurl: https://api.twitch.tv/helix
+            auth_endpoint: https://id.twitch.tv/oauth2
+            client_id: ${OAUTH_TWITCH_CLIENT_ID}
+            client_secret: ${OAUTH_TWITCH_CLIENT_SECRET}
+            scope: user:read:follows
+            redirect_uri: https://localhost:8080/twitch/login/result
