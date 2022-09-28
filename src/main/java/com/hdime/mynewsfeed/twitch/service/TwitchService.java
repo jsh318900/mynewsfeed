@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -40,14 +44,16 @@ public class TwitchService {
     }
 
     public String getAccessToken(String token) {
+        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+        formData.add("client_id", env.getProperty("${external.api.twitch.client_id}"));
+        formData.add("client_secret", env.getProperty("${external.api.twitch.client_secret}"));
+        formData.add("code", token);
+        formData.add("grant_type", "authorization_code");
+        formData.add("redirect_uri", env.getProperty("${external.api.twitch.redirect_uri}"));
         return authClient.post()
-                .uri(uriBuilder -> uriBuilder.pathSegment("token")
-                        .queryParam("client_id", env.getProperty("${external.api.twitch.client_id}"))
-                        .queryParam("client_secret", env.getProperty("${external.api.twitch.client_secret}"))
-                        .queryParam("code", token)
-                        .queryParam("grant_type", "authorization_code")
-                        .queryParam("redirect_uri", env.getProperty("external.api.twitch.redirect_uri"))
-                        .build())
+                .uri(uriBuilder -> uriBuilder.pathSegment("token").build())
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .body(BodyInserters.fromFormData(formData))
                 .retrieve()
                 .bodyToMono(AccessToken.class)
                 .block()
@@ -60,8 +66,9 @@ public class TwitchService {
                 .header("Authorization", "Bearer " + accessToken)
                 .header("Client-Id", env.getProperty("external.api.twitch.client_id"))
                 .retrieve()
-                .bodyToMono(TwitchUser.class)
+                .bodyToMono(new ParameterizedTypeReference<List<TwitchUser>>() {})
                 .block()
+                .get(0)
                 .getId();
     }
 

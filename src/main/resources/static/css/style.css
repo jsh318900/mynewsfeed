@@ -1,0 +1,76 @@
+:root {
+	--background-color: #260104;
+	--title-color: #F2F2F0;
+	--youtube-border: #730220;
+	--twitch-border: #6F36BF;
+	--list-border: #5F1B8C;
+	--font-color: #260104;
+	--content-background: #F2F2F0;
+}
+
+.main {
+	background-color: var(--background-color);
+	width: auto;
+	height: auto;
+	margin: 0 50px;
+	padding: 15px 0;
+}
+
+.main > section {
+	align-content: center;
+}
+
+.title_header {
+	color: var(--title-color);
+}
+
+.content {
+	background-color: var(--content-background);
+	min-width: 350px;
+	min-height: 750px;
+	color: var(--font-color);
+	border-width: 5px;
+	border-style: solid;
+	border-color: var(--list-border);
+	margin: 15px 0;
+	padding: 0 20px;
+	float: left;
+}
+
+.youtube {
+	border-color: var(--youtube-border);
+	min-width: 600px;
+	margin-left: 45px;
+	text-align: center;
+}
+
+.twitch {
+	border-color: var(--twitch-border);
+	min-width: 600px;
+	margin-left: 45px;
+	text-align: center;
+}
+
+.content button {
+	min-width: 200px;
+	min-height: 75px;
+	border: solid;
+	border-width: 5px;
+	cursor: pointer;
+}
+
+.youtube button {
+	margin-top: 50px;
+	border-color: var(--youtube-border);
+	color: var(--youtube-border);
+}
+
+.twitch button {
+	border-color: var(--twitch-border);
+	color: var(--twitch-border);
+}
+
+#login {
+	position:relative;
+	top:175px;
+}

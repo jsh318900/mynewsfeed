@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>My NewsFeed</title>
+</head>
+<body class= "main">
+	<header class="title_header"><h1>My NewsFeed</h1></header>
+	<section>
+		<article class="content">
+			<h2>Subscribed Contents</h2>
+			YouTube:
+			<ul>
+				<li><strong>&rarr;</strong>	Need sign in</li>
+			</ul>
+			Twitch:
+			<ul>
+				<li><strong>&rarr;</strong>	Need sign in</li>
+			</ul>
+		</article>
+
+		<article class="content youtube">
+			<div id="login">
+				<img src="img/youtube_logo.png" style="width:250px"><br>
+				<button><h2>Sign in</h2></button>	
+			</div>
+		</article>
+
+		<article class="content twitch">
+			<div id="login">
+				<img src="img/twitch_logo.png" style="width:200px"><br>
+				<button onclick="twitchLogin()"><h2>Sign in</h2></button>
+			</div>
+		</article>
+
+	</section>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script type="channel_list">
+	<ul>
+		{{#each channels}}
+			<li><strong>&rarr;</strong>	<a href = "twitch.tv/{{name}}">{{name}}</a></li>
+		{{/each}}
+	</ul>
+</script>
+<script type="twitch_stream_list">
+
+</script>
+<script src="js/main.js"></script>
+</html>
+
